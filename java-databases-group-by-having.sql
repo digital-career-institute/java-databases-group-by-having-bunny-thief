@@ -26,6 +26,10 @@
 	GROUP BY s.shipper_id;
 
 --  5. Select the most expensive order.
+	SELECT o.customer_id, order_details.order_id, SUM(order_details.quantity * order_details.unit_price - order_details.discount) as order_total FROM order_details
+	JOIN orders AS o ON order_details.order_id = o.order_id
+	GROUP BY order_details.order_id, o.customer_id
+	ORDER BY order_total;
 
 --  6. Select an order that have the most items in it.
 
