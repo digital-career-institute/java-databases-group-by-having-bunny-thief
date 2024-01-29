@@ -63,3 +63,9 @@
 	LIMIT 10;
 
 -- 10. Select the least popular categories of products for orders made in 1997.
+	SELECT c.category_name, SUM(od.quantity) as quantity_sold FROM categories AS c
+	JOIN products AS p ON c.category_id = p.category_id
+	JOIN order_details AS od ON od.product_id = p.product_id
+	JOIN orders AS o ON o.order_id = od.order_id
+	GROUP BY c.category_name
+	ORDER BY quantity_sold;
