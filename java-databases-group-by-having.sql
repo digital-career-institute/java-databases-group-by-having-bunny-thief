@@ -47,6 +47,10 @@
 	ORDER BY quantity DESC;
 
 --  8. Select category id, category name and sumarize quantity of products for each category. Take into consideratation only categories with id: 1,2,3 and list only those where sum of products is bigger than 6000.
+	SELECT c.category_id, c.category_name, SUM(p.units_in_stock) FROM categories AS c
+	JOIN products AS p ON p.category_id = c.category_id
+	GROUP BY c.category_id
+	ORDER BY c.category_name;
 
 --  9. Make a report on the 10 best selling products with categories in 1997.
 
