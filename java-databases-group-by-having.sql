@@ -21,7 +21,9 @@
 	ORDER BY order_date DESC;
 
 --  4. Select shipper company name and calculate how many orders have each.
-
+	SELECT s.shipper_id, s.company_name, COUNT(o.order_id) FROM shippers AS s
+	JOIN orders AS o ON s.shipper_id = o.ship_via
+	GROUP BY s.shipper_id;
 
 --  5. Select the most expensive order.
 
