@@ -53,5 +53,13 @@
 	ORDER BY c.category_name;
 
 --  9. Make a report on the 10 best selling products with categories in 1997.
+	SELECT p.product_name, c.category_name, SUM(od.quantity) AS quantity_sold FROM products AS p
+	JOIN categories AS c ON p.category_id = c.category_id
+	JOIN order_details AS od ON p.product_id = od.product_id
+	JOIN orders AS o ON od.order_id = o.order_id
+	WHERE o.shipped_date >= '1997-01-01' AND o.shipped_date <= '1997-12-31'
+	GROUP BY p.product_name, c.category_name
+	ORDER BY quantity_sold DESC
+	LIMIT 10;
 
 -- 10. Select the least popular categories of products for orders made in 1997.
