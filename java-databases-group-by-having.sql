@@ -1,6 +1,11 @@
 -- Java- Databases: Group By & Having
+	
 
 --  1. Select all orders that have total price greater than 300.
+	SELECT order_id, SUM(unit_price * quantity)  as order_total FROM order_details
+	GROUP BY order_id
+	HAVING (SUM(unit_price * quantity) > 300)
+	ORDER BY order_id;
 
 --  2. Select only employees that have more than 100 orders.
 
