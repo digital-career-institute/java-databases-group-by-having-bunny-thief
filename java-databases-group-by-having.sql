@@ -8,11 +8,11 @@
 	ORDER BY order_id;
 
 --  2. Select only employees that have more than 100 orders.
-	SELECT e.employee_id, e.first_name, e.last_name, FROM employees as e
-	JOIN orders ON orders.employee_id = e.employee_id
-	JOIN order_details ON order_details.order_id = orders.order_id
+	SELECT e.employee_id, first_name, e.last_name, COUNT(orders.order_id) as order_count FROM employees AS e
+	RIGHT JOIN orders on e.employee_id = orders.employee_id
 	GROUP BY e.employee_id
-	HAVING (SELECT * FROM order_details );
+	HAVING COUNT(orders.order_id) > 100
+	ORDER BY order_count DESC;
 
 --  3. Select the latest order (order_id, customer_id, order_date) for each customer. Include only orders that were made after 1998-05-05.
 	SELECT order_id, customer_id, order_date FROM orders
@@ -21,6 +21,7 @@
 	ORDER BY order_date DESC;
 
 --  4. Select shipper company name and calculate how many orders have each.
+
 
 --  5. Select the most expensive order.
 
