@@ -32,6 +32,11 @@
 	ORDER BY order_total;
 
 --  6. Select an order that have the most items in it.
+	SELECT od.order_id, o.customer_id, sum(quantity) AS quantity FROM order_details AS od
+	JOIN orders as o ON o.order_id = od.order_id
+	GROUP BY od.order_id, o.customer_id
+	ORDER BY quantity DESC
+	LIMIT 1;
 
 --  7. Select orders that was shipped by company with id = 1 and contains more than 4 items.
 
