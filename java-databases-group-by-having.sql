@@ -39,6 +39,12 @@
 	LIMIT 1;
 
 --  7. Select orders that was shipped by company with id = 1 and contains more than 4 items.
+	SELECT od.order_id, SUM(od.quantity) as quantity FROM order_details as od
+	JOIN orders AS o ON o.order_id = od.order_id
+	JOIN shippers AS s ON s.shipper_id = o.ship_via
+	GROUP By od.order_id, s.shipper_id
+	HAVING SUM(od.quantity) > 4
+	ORDER BY quantity DESC;
 
 --  8. Select category id, category name and sumarize quantity of products for each category. Take into consideratation only categories with id: 1,2,3 and list only those where sum of products is bigger than 6000.
 
